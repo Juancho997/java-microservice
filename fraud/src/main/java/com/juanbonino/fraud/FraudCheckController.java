@@ -1,12 +1,14 @@
 package com.juanbonino.fraud;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("api/v1/fraud-check")
+@RequestMapping("/api/v1/fraud-check")
 @AllArgsConstructor
+@Slf4j
 public class FraudCheckController {
 
     private final FraudCheckService fraudCheckService;
@@ -17,7 +19,7 @@ public class FraudCheckController {
 
         boolean isFraudulentCustomer = fraudCheckService
                 .isFraudulentCustomer(customerId);
-
+        log.info("fraud check request for costumer {}", customerId);
         return new FraudCheckResponse(isFraudulentCustomer);
     }
 
